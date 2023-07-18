@@ -1,61 +1,58 @@
 # speechToTextAmazon
-Amazon Transcribe ve Python ile speech to text kullanımı raporu
+Speech to text usage report with Amazon Transcribe and Python
 
-![githubamazon1](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/502e8a68-f341-492b-88f6-e0a7d5d159d0)
-* Öncelikle bir aws hesabı açın.
-* Daha sonra S3 Bucket oluşturun. Bu Bucket'in içine çevireceğimiz ses dosyasını koyun.
-* Yukarıda gördüğünüz gibi istediğiniz ses dosyasını S3 Buckete yükleyebilirsiniz.
-* S3 bucket'i global bölgede kullanın.
+![githubamazon1](https://github.com/iremibis/SpeechToText/assets/112003747/1f572876-9864-4445-b028-33f37e795837)
+* First open an aws account.
+* Create S3 Bucket. In this Bucket put the audio file we want to translate.
+* I have uploaded a 50-second speech file of South Park character Craig Tucker.
+* As you can see above, you can upload the desired audio file to S3 Bucket by clicking the upload button.
+* Use S3 bucket in global region.
 
-![githubamazon2](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/e0c8bb64-1712-498a-86a8-b311427d4759)
-* Burada Amazon Transcribe > Create Transcription Job kısmına gelerek bir Transcription Job oluşturun.
-* Oluştururken çıkan seçeneklerde hepsi default ayarlarda olacak.
-* Yukarıdaki ekran resminde gördüğünüz gibi Transcription jobs burada görünüyor. İlk oluşturduğunuzda burası boş görünecek.
-* Python kodunu her çalıştırdığımızda yeni bir example job üretecek ve burada görünecek.
-* Transcription Job'u hangi bölgede kullandığınıza dikkat edin. (Örneğin eu-central-1 i seçerseniz kod kısmında bunu belirtmeniz gerekir.)
+![githubamazon2](https://github.com/iremibis/SpeechToText/assets/112003747/9520ef97-00ab-49de-bfb6-d4f49d3724fc)
+* Create a Transcription Job here by going to Amazon Transcribe > Create Transcription Job.
+* All of the options that come up when creating will be in default settings.
+* Transcription jobs appear here as you can see in the screenshot above. The first time you create it, it will appear empty.
+* Every time we run the Python code, it will generate a new example job and appear here.
+* Be careful in which region you use Transcription Job. (For example, if you choose eu-central-1 (Frankfurt), you must specify this in the code section.)
 
-![githubamazon3](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/79b79366-b489-4da0-830d-3ae8d74ee280)
-* Daha sonra bir aws IAM accountu oluşturun.
-* IAM Dashboard'dan Users kısmına gelin ve Add Users butonuna tıklayın.
-* Kırmızı kutucuklarla gösterilen seçenekleri seçin. Bu bizim erişimimizi sağlayacak.
-* En alt sağda Next butonuna tıklayın.
-* Global bölgede kullanın.
+![githubamazon3](https://github.com/iremibis/SpeechToText/assets/112003747/5a408b02-f2a2-4adc-b4a2-64820c2fb337)
+* Now create an aws IAM account.
+* From the IAM Dashboard, navigate to the Users section and click the Add Users button.
+* Select the options indicated by the red boxes. This will give us access.
+* Click the Next button at the bottom right.
+* Use in global region.
 
-![githubamazon4](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/5741c142-cb98-4d1a-8fc1-f6b1c6ef3826)
-* Bu sayfada kırmızı kutucukta gösterilen Create User Butonuna tıklayın.
+![githubamazon4](https://github.com/iremibis/SpeechToText/assets/112003747/a35766b7-04d3-4dee-aa65-2629ca30b825)
+* On this page, click the Create User Button shown in the red box.
 
-![githubamazon5](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/0748e43d-d720-44c0-91a5-a8d8cf3cbfdf)
-* Kırmızı kutucukla gösterilen Security Credentials sekmesine gelin.
+![githubamazon5](https://github.com/iremibis/SpeechToText/assets/112003747/3b8490bb-8c36-493e-a295-7b367254ae7c)
+* Go to the Security Credentials tab with the red box.
 
-![githubamazon6](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/9b6870f3-d92f-492e-8827-b9bff9ec9e82)
-* Kırmızı kutucukla gösterilen Create Access Key butonuna tıklayın.
+![githubamazon6](https://github.com/iremibis/SpeechToText/assets/112003747/cb82bbff-2a47-4418-9666-490e3e5c9823)
+* Click on the Create Access Key button, indicated by the red box.
 
-![githubamazon7](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/a2434294-4151-416a-a60a-e4a4b659f99e)
-* AWS hesabımıza komut satırı arayüzünün erişimine izin vermek ve sağlamak için CLI seçeneğini seçin.
-* Alternatif önerileri kabul ettiğimizi beyan etmek için tik işaretini işaretleyin.
-* Next butonuna basın
+![githubamazon7](https://github.com/iremibis/SpeechToText/assets/112003747/198d497b-ed13-49a8-a36e-ae525f2faa22)
+* Select the CLI option to allow and provide command line interface access to our AWS account.
+* Tick the box to declare that we accept alternative suggestions.
+* Press the Next button
 
-![githubamazon8](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/f01a786b-42f3-4347-b527-939cdad404b0)
-* Bu sayfada Description Tag ayarlamamızı istiyor. Bu erişim anahtarının açıklaması, kullanıcıya bir etiket olarak eklenir ve erişim anahtarının yanında gösterilir.
-* Bu opsiyonel bir seçenek isterseniz ayarlayabilirsiniz. Açıklamayı düzgün yapmaya dikkat edin. İyi bir açıklama, bu erişim anahtarını daha sonra güvenle döndürmenize yardımcı olacaktır.
-* Create Access Key butonuna tıklayın.
+![githubamazon8](https://github.com/iremibis/SpeechToText/assets/112003747/25853644-bfa7-4e36-8ca7-4dce19a92177)
+* It wants us to set Description Tag on this page. The description of this access key is attached to the user as a label and is displayed next to the access key.
+* This is an optional option, you can set it if you want. Be careful to make the explanation properly. A good explanation will help you safely return this access key later.
+* Click the Create Access Key button.
 
-![githubamazon9](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/49c2255f-0157-4078-b784-f4d75c581720)
-* Bu sayfada access key ve Secret access key oluşturuldu.
-* Access key ve Secret access key'i kaybederseniz veya unutursanız onu geri alamazsınız. Bunun yerine, yeni bir erişim anahtarı oluşturun ve eski anahtarı devre dışı bırakın.
-* Kırmızı kutucukta gösterilen Download .csv file butonuna tıklayarak keyleri bilgisayarınıza indirebilirsiniz böylece kaybetmezsiniz. 
-* Keyleri python terminaline yazıp kod ile birbirine bağlayın.
+![githubamazon9](https://github.com/iremibis/SpeechToText/assets/112003747/551d1d7e-e16b-4410-8594-81ee34e431ac)
+* Access key and Secret access key were created on this page.
+* If you lose or forget Access key and Secret access key, you cannot get it back. Instead, create a new access key and disable the old key.
+* You can download the keys to your computer by clicking the Download .csv file button shown in the red box, so you do not lose them.
+* Write the keys in the python terminal and connect them with the code.
 
-# Keyleri import etmek.
-Terminalinizi açın ve aşağıdaki komutu çalıştırın:
+# Importing keys.
+Open your terminal and run the following command:
 * export AWS_ACCESS_KEY_ID=ACCESS KEYİNİZ
 * export AWS_SECRET_ACCESS_KEY=SECRET ACCESS KEYİNİZ
 
-# PYTHON KOD BLOĞU :
-
-Yukarıdaki örnekte, Python kodunuz ````python` ve ```` ` arasına yerleştirilmiştir. Bu, README dosyasında kod bloğunun Python dilinde olduğunu belirtir.
-
-Kod bloğunuz aşağıdaki gibi görünecektir:
+# PYTHON CODE BLOCK :
 
 ```python
 import time
@@ -108,28 +105,28 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-* Gördüğünüz gibi kod bloğunda ses dosyasının türü (mp3)
-* file urisi = 's3://transcribebucket78/speech.mp3'
-* transcribe clien'in adresi = boto3.client('transcribe', region_name='eu-central-1') belirtilmiştir.
+* As you can see the type of audio file (mp3) in the code block
+* file uri = 's3://transcribebucket78/speech.mp3'
+* The address of the transcribe client = boto3.client('transcribe', region_name='eu-central-1') is specified.
 
-![githubamazonoutput1real](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/07063f8d-316c-4c03-977a-c7aa73dce442)
-* Bu kod bloğuyla output bu şekilde görünmektedir.
+![githubamazonoutput1real](https://github.com/iremibis/SpeechToText/assets/112003747/e7456139-252e-4b91-a94f-dd887163db0a)
+* With this code block, the output looks like this. We can see the translated version of the audio file.
 
-![githubamazon11](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/d586e43a-6b72-48d0-8642-949cb81e6fe5)
-* Kod başarıyla çalıştıktan sonra Amazon Transcribe > Transcription jobs kısmında oluşturduğumuz Example-job1 gözüküyor.
+![githubamazon11](https://github.com/iremibis/SpeechToText/assets/112003747/d620d0bd-1e10-4467-93d9-bc4647949791)
+* After the code runs successfully, in Amazon Transcribe > Transcription jobs, we can see Example-job1.
 
-![githubamazon12](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/c6541fb0-7d9b-46dd-8185-78c340cfb681)
-* Example-job1'i açtığımızda bize bu şekilde aws transcribe'i gösteriyor. Her bir kelimenin üstüne tıkladığınızda ses dosyasının kaçıncı saniyeleri arasında söylendiği ve word confidence oranı gözükür.
+![githubamazon12](https://github.com/iremibis/SpeechToText/assets/112003747/2abaf348-132f-41be-8c2e-4cfb0247c7a8)
+* When we open Example-job1, it shows us aws transcribe in paragraph form. When you click on each word, the second interval of the word in the audio file and the word confidence rate appear.
 
-![githubamazon10](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/63322e35-30ec-4e65-81ee-73302fcb94f5)
-* Kırmızı kutucuk içerisindeki kodu,
+![githubamazon10](https://github.com/iremibis/SpeechToText/assets/112003747/41233e05-118f-4665-823b-16f843cc65bb)
+* The code in the red box,
 
 ```
 print(
                     f"Download the transcript from\n"
                     f"\t{job['TranscriptionJob']['Transcript']['TranscriptFileUri']}.")
 ```
-* Kodu ile değiştirirseniz, çıktı kısmında ses dosyasının transcribe'ini içeren json dosyası indirme linki görürsünüz.
+* If you replace it with this code, you will see the json file download link with the transcribe of the audio file in the output section.
 
-![githubamazonoutput2](https://github.com/emredogan7878/speechToTextAmazon/assets/112003747/8dac7109-56b8-4c31-918a-fe0cf97bb150)
-* Çıktınız bu şekilde olur ve linke tıkladığınız zaman ses dosyaınızla ilgili transcribe metnini ve start_time, end_time, confidence, content hakkında bilgiler içeren bir json dosyası indirirsiniz.
+![githubamazonoutput2](https://github.com/iremibis/SpeechToText/assets/112003747/3f3330e3-0a3c-44fc-8c80-f8fec43df167)
+* Your output will be like this and when you click on the link, you will download a json file containing the transcribe text of your audio file and information about start_time, end_time, confidence, content.
